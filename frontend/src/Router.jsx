@@ -36,7 +36,7 @@ const Router = () => {
         <Route exact path={"/matches/:{id}"} component={token ? Chat : Landing} />
         <Route exact path={"/profile"} component={ MyProfile} />
         <Route exact path={'/postinst'} component={PostInst} />
-        <Route exact path={"/edit/:{id}/"}/><Edit/><Route/>
+        <Route path="/edit/:id" component={Edit}/>
         
       </Switch>
     </React.Fragment>

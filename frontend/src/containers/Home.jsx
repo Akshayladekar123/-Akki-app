@@ -13,7 +13,6 @@ const Home = () => {
     const posts = getPosts(selector);
     let [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
-    console.log(posts);
 
     useEffect(() => {
         dispatch(fetchPosts({ page }));

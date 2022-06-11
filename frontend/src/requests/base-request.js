@@ -1,4 +1,4 @@
-import http from '../axios/index';
+import http from 'axios';
 
 export default class BaseService {
     static get METHOD_GET() {
@@ -34,7 +34,7 @@ export default class BaseService {
     }
 
     update(id, data) {
-        return this.performRequest(BaseService.METHOD_PUT, `update/${id}/`, data);
+        return this.performRequest(BaseService.METHOD_PUT, `edit/${id}/`, data);
     }
 
     destroy(id, data = {}) {

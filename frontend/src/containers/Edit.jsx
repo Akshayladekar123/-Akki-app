@@ -1,70 +1,100 @@
 import React, { useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from '../reducks/users/selectors';
+import { getUserm } from '../reducks/users/selectors';
 import { editPost } from '../reducks/posts/operations';
-
+import taskRequest from '../requests/post-request';
+import postRequest from '../../src/requests/user-request';
+import {useParams} from 'react-router-dom';
+import { useEffect } from 'react';
+import { getPosts } from '../reducks/posts/selectors';
+import { Route, Redirect } from 'react-router';
 
 const Edit = () => {
     
-    const initialValues = { name: '', body: '' };
-    const [values, setValues] = useState(initialValues);
-    const [previewImage, setPreviewImage] = useState(null);
-    const [image, setImage] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-   
-    const dispatch = useDispatch();
-    
-    const selector = useSelector((state) => state);
-    const user = getUser(selector);
+    const [values, setValues] = useState({
+        post_id: '',
+        name: '',
+        body:'',
+        image:''
+    });
+    // const [posts, setPosts] = useState([]);
+    const  { id } = useParams();
 
-    const inputImage = event => {
+    const [posts, setPosts] = useState([]);
+    const [image, setImage] = useState([]);
+
+
+    const selector = useSelector(state => state);
+    const postDetails = getPosts(selector);
+    
+    useEffect(()=>{
+
+        let finpost =  postDetails.results.filter(
+            res =>{
+                return id == res.id
+                }
+        )
+        setValues(finpost[0]);
+    },[]);
+    
+    console.log("Posts", posts)
+    console.log("values",values)
+
+
+    const handleOnchange = e => {
+        const { name, value } = e.target;
+        setValues(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const [previewImage, setPreviewImage] = useState(null);
+    
+    
+    
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setValues({
+          ...values,
+          [name]: value,
+        });
+      };
+
+      const inputImage = (event) => {
         const file = event.target.files[0];
         const objectUrl = URL.createObjectURL(file);
         setPreviewImage(objectUrl);
         setImage(file);
-    };
+        setValues({ ...values, profile: null });
+      };
 
-    const inputFile = useRef(null);
-    const handleInputChange = e => {
-        const { name, value } = e.target;
-        setValues({ ...values, [name]: value });
-    };
-    
-    const addPostButton = async () => {
-        if ( !values.body.trim()) {
-            alert(`Please fill out all required form.`);
-            return;
-        }
-        setIsLoading(true);
-        console.log(user.username);
-        await dispatch(addPost({ name: user.username, body: values.body, image }));
+      const previewImages = values.image;
+      console.log(previewImage);
 
-        setIsLoading(false);
-        setValues({ name: '', body: '' });
-        setPreviewImage(null);
-        setImage([]);
-        inputFile.current.value = '';
-    };
-    
-    const editPostHandler = async () => {
-		setIsLoading(true);
-		await dispatch(editPost({ ...values, profile: image }, values.id));
-    	setIsLoading(false);
-	};
+      const inputFile = useRef(null);
+        const onButtonClick = () => {
+        inputFile.current.click();
+  };
 
+    const editPostHandler=()=>{
+        
+        postRequest
+                .update(id, {
+                    body: values.body,
+                    image: values.image
+                })
+                .then(() => <Redirect to="/"/>)
+                .catch(err => {
+                    // setErrors(err.response.data);
+                    // setIsLoading(false);
+                })
 
-    console.log("hi");
+    }
+
   return (
     <section className="post_form">
-            {/* <input
-                type="text"
-                name="name"
-                value={values.name}
-                placeholder="Name"
-                onChange={handleInputChange}
-                required
-            /> */}
             <textarea
                 name="body"
                 value={values.body}
@@ -72,22 +102,28 @@ const Edit = () => {
                 onChange={handleInputChange}
                 required
             ></textarea>
-            <input type="file" ref={inputFile} onChange={inputImage} />
-            {previewImage && (
-                <div className="upload-area">
-                    <img
-                        name="image"
-                        type="file"
-                        src={previewImage}
-                        className={`upload-image ${previewImage ? 'preview-image' : ''}`}
-                        alt="Upload"
-                    />
-                </div>
-            )}
+            {/* <input type="file" ref={inputFile} onChange={inputImage} /> */}
+            <p>Update Image</p>
+            <input
+              type="file"
+              style={{ display: "none" }}
+              ref={inputFile}
+              onChange={inputImage}
+            />
+            <img
+              onClick={onButtonClick}
+              name="image"
+              type="file"
+              src={previewImage ? previewImage : previewImages}
+              className={`upload-area ${previewImage ? "preview-image" : ""}`}
+              alt="Upload"
+            />
+        
+            
             <a href="http://localhost:3000/">
                 {' '}
                 <button type="button" onClick={editPostHandler}>
-                    {isLoading ? 'Posing...' : 'Post'}
+                    UPDATE
                 </button>
             </a>
         </section>
