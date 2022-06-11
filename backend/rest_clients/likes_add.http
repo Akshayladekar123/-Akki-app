@@ -1,0 +1,10 @@
+# To use the http client, install "REST Client" extension of Visual Studio Code.
+# To send the request and get the result, click the 'Send Request' 
+POST http://127.0.0.1:8000/likes/add/ HTTP/1.1
+content-type: application/json
+#Authorization: pbkdf2_sha256$260000$ngxyKHMRX8UsIyI0KVx0nn$tssgYGEIMacJZJTfQV7MWyizW7g0mF85OxW0FnILggI=
+Authorization: token_user_id_1_hayato
+
+{
+	"receive_user_id": 5
+}

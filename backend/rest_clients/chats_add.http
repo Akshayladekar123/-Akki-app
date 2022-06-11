@@ -1,0 +1,11 @@
+# To use the http client, install "REST Client" extension of Visual Studio Code.
+# To send the request and get the result, click the 'Send Request' 
+POST http://127.0.0.1:8000/chats/add/ HTTP/1.1
+content-type: application/json
+Authorization: token_user_id_1_hayato
+# Authorization: fecae4fc0315d3e4e9c5581546078a86a94ce702e2e198ebb9661701d6e6
+
+{
+	"match_id": 2,
+	"body": "Can I call now?"
+}

@@ -1,0 +1,48 @@
+email: anny@gmail.com
+password: anny123456
+Female
+
+email: jossie@gmail.com
+password: jossie123456
+Female
+
+email: rachel@gmail.com
+password: rachel123456
+Female
+
+email: monica@gmail.com
+password: monica123456
+Female
+
+email: jane@gmail.com
+password: jane123456
+Female
+
+email: goodman@gmail.com
+password: goodman123456
+Male
+
+email: rocky@gmail.com
+password: rocky123456
+Male
+
+email: jake@gmail.com
+password: jake123456
+Male
+
+email: chandler@gmail.com
+password: chandler123456
+Male
+
+email: lesley@gmail.com
+password: lesley123456
+Male
+
+Please use 
+- anny@gmail.com
+- jossie@gmail.com
+- rocky@gmail.com
+- lesley@gmail.com
+- jake@gmail.com
+- chandler@gmail.com
+Account for some exsited data such as Matches and Chats.
