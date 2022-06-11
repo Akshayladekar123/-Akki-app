@@ -15,7 +15,9 @@ body {
   display: flex;
   height: 100vh;
   position: relative;
-  /* overflow: auto; */
+  border-right: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-top: 1px solid lightgray;
 }
 
 .landing-content {
@@ -174,7 +176,7 @@ header {
   box-shadow: 0 10px 25px 0 rgb(141 141 141 / 24%);
   display: flex;
   justify-content: space-between;
-  position: fixed;
+  /* position: fixed; */
   z-index: 2;
 }
 
@@ -198,6 +200,9 @@ header .name {
 ******************************/
 
 form {
+  text-align: center;
+}
+form.profile {
   text-align: center;
 }
 
@@ -229,9 +234,9 @@ select::-ms-expand {
 }
 
 .upload-area {
-  width: fit-content;
+  max-width: 430px;
   margin: 0 auto;
-  display: block;
+  /* display: block; */
   cursor: pointer;
 }
 

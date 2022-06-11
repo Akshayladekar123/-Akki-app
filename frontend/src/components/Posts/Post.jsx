@@ -3,8 +3,10 @@ import IconUser from '../../assets/img/user-icon.jpg';
 import IconSmallMenu from '../../assets/img/icon-small-menu.svg';
 import { deletePost } from '../../reducks/posts/operations';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getUser } from '../../reducks/users/selectors';
+
 
 const Post = React.forwardRef((props, ref) => {
     const { post } = props;
@@ -30,6 +32,10 @@ const Post = React.forwardRef((props, ref) => {
         });
     };
 
+    const selector = useSelector((state) => state);
+    const user = getUser(selector);
+
+
 
     return (
         <li ref={ref}>
@@ -42,11 +48,11 @@ const Post = React.forwardRef((props, ref) => {
                     </Link>
                     <br/>
                     <br/>
-                    <span onClick={deleteHandler}>Delete</span>
+                    <button onClick={deleteHandler}>Delete</button>
                 </div>
             )}
             <div className="logo">
-                <img src={IconUser} alt="user-profile" />
+                <img src={user.main_image} alt="user-profile" />
             </div>
             <div className="name_body">
                 <div className="name">{post.name}</div>

@@ -32,7 +32,7 @@ const SignIn = () => {
     await dispatch(signIn(values));
     setIsLoading(false);
 
-    history.push("/");
+    history.push("/postinst");
   };
 
   return (

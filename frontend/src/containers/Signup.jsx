@@ -65,7 +65,7 @@ const SignUp = () => {
     setIsLoading(true);
     await dispatch(signUp({ ...values, main_image: image }));
     setIsLoading(false);
-    history.push("/");
+    history.push("/postinst");
   };
 
   return (

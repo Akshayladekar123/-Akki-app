@@ -16,24 +16,24 @@ export const fetchPosts = params => {
     };
 };
 
-// export const editPost = (data={}, id) =>{
-//     return async (dispatch) => {
-// 		return api
-// 			.editPost(data, id)
-// 			.then((response) => {
-// 				localStorage.setItem(
-// 					LOGIN_USER_KEY,
-// 					JSON.stringify(response)
-// 				);
-// 				dispatch(updateProfileAction(response));
-// 			})
-// 			.catch((error) => {
-// 				dispatch(updateProfileError(error.response.data));
-// 			});
-// 	};
-//************************GET -> post, Post-> UPdate -> return val
+export const editPost = (data={}, id) =>{
+    return async (dispatch) => {
+		return api
+			.editPost(data, id)
+			.then((response) => {
+				localStorage.setItem(
+					LOGIN_USER_KEY,
+					JSON.stringify(response)
+				);
+				dispatch(updateProfileAction(response));
+			})
+			.catch((error) => {
+				dispatch(updateProfileError(error.response.data));
+			});
+	};
+// ************************GET -> post, Post-> UPdate -> return val
 
-// }
+}
 
 export const deletePost = id => {
     return dispatch => {

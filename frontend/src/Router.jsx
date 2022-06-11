@@ -12,6 +12,7 @@ import { getUser } from "./reducks/users/selectors";
 import MyProfile from "./containers/Profile";
 import PostInst from "./containers/PostInst";
 import Edit from "./containers/Edit";
+import PostForm from "./components/Posts/PostForm";
 
 
 const Router = () => {
@@ -27,7 +28,7 @@ const Router = () => {
   return (
     <React.Fragment>
       <Switch>
-        
+
         <Route exact path={"/"} component={token ? Home : Landing} />
         <Route exact path={"/sign-up"} component={token ? Home : SignUp} />
         <Route exact path={"/sign-in"} component={token ? Home : SignIn} />

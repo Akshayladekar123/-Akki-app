@@ -42,8 +42,8 @@ export default class API {
     } catch (error) {
         throw new Error(error);
     }
-};
-addPost = async postBody => {
+  };
+  addPost = async postBody => {
     const formData = new FormData();
 
     for (const key in postBody) {
@@ -56,14 +56,14 @@ addPost = async postBody => {
     } catch (error) {
         throw new Error(error);
     }
-};
-deletePost = async id => {
+  };
+  deletePost = async id => {
     try {
         return await api.delete(`/posts/delete/${id}/`);
     } catch (error) {
         throw new Error(error);
     }
-};
+  };
 
   signUp = async (signUpBody) => {
     const formData = new FormData();
@@ -80,7 +80,7 @@ deletePost = async id => {
       .catch((error) => {
         throw new Error(error);
       });
-  };
+    };
 
   signIn = async (signInBody) => {
     const formData = new FormData();
