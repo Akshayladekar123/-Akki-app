@@ -68,7 +68,7 @@ const Edit = () => {
         const objectUrl = URL.createObjectURL(file);
         setPreviewImage(objectUrl);
         setImage(file);
-        setValues({ ...values, profile: null });
+        setValues({ ...values, image: null });
       };
 
       const previewImages = values.image;
@@ -79,23 +79,9 @@ const Edit = () => {
         inputFile.current.click();
   };
 
-    // const editPostHandler=()=>{
-        
-    //     postRequest
-    //             .update(id, {
-    //                 body: values.body,
-    //                 image: values.image
-    //             })
-    //             .then(() => <Redirect to="/"/>)
-    //             .catch(err => {
-    //                 // setErrors(err.response.data);
-    //                 // setIsLoading(false);
-    //             })
-
-    // }
     const editPostHandler = async () => {
       console.log("editPostHandler");
-      await dispatch(editPost({ ...values, profile: image }, values.id));
+      await dispatch(editPost({ ...values, image: image }, values.id));
     
     };
 

@@ -10,7 +10,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PostUpdateSerializer(serializers.ModelSerializer):
-    # main_image = serializers.ImageField(required=False)
+    image = serializers.ImageField(required=False)
 
     class Meta:
         model = Post
