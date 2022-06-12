@@ -1,5 +1,5 @@
 from rest_framework import generics
-from .serializers import PostSerializer
+from .serializers import PostSerializer, PostUpdateSerializer
 from .models import Post
 
 class PostList(generics.ListAPIView):
@@ -20,3 +20,10 @@ class PostDetail(generics.RetrieveAPIView, generics.UpdateAPIView):
 class PostDelete(generics.DestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+class PostUpdate(generics.RetrieveAPIView, generics.UpdateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostUpdateSerializer
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+

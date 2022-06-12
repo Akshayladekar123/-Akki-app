@@ -8,3 +8,12 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
+
+class PostUpdateSerializer(serializers.ModelSerializer):
+    # main_image = serializers.ImageField(required=False)
+
+    class Meta:
+        model = Post
+        fields = ('id', 'image','name','body')
+
+

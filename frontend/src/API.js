@@ -65,6 +65,8 @@ export default class API {
     }
   };
 
+
+
   signUp = async (signUpBody) => {
     const formData = new FormData();
 
@@ -97,13 +99,23 @@ export default class API {
       });
   };
 
+  editPost = async (editPostBody, id) => {
+    console.log("in edit post api")
+		const formData = new FormData();
+		for (const key in editPostBody) {
+			formData.append(key, editPostBody[key]);
+		}
+    console.log(id);
+		return api.put(`/posts/update/${id}/`, formData, { requireToken: true });
+	};
+
   updateProfile = async (updateProfileBody, id) => {
 		const formData = new FormData();
 		for (const key in updateProfileBody) {
 			formData.append(key, updateProfileBody[key]);
 		}
     console.log(id);
-		return api.put(`/users/update/${id}/`, formData, { requireToken: true });
+		return api.put(`/users/update/${id}/`, formData, { requireToken: false });
 	};
 
   getUsers = async (params = {}) => {

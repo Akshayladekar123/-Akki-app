@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserm } from '../reducks/users/selectors';
+import { getUser } from '../reducks/users/selectors';
 import { editPost } from '../reducks/posts/operations';
 import taskRequest from '../requests/post-request';
-import postRequest from '../../src/requests/user-request';
+import postRequest from '../../src/requests/post-request';
 import {useParams} from 'react-router-dom';
 import { useEffect } from 'react';
 import { getPosts } from '../reducks/posts/selectors';
@@ -20,6 +20,7 @@ const Edit = () => {
     });
     // const [posts, setPosts] = useState([]);
     const  { id } = useParams();
+    const dispatch = useDispatch();
 
     const [posts, setPosts] = useState([]);
     const [image, setImage] = useState([]);
@@ -78,20 +79,25 @@ const Edit = () => {
         inputFile.current.click();
   };
 
-    const editPostHandler=()=>{
+    // const editPostHandler=()=>{
         
-        postRequest
-                .update(id, {
-                    body: values.body,
-                    image: values.image
-                })
-                .then(() => <Redirect to="/"/>)
-                .catch(err => {
-                    // setErrors(err.response.data);
-                    // setIsLoading(false);
-                })
+    //     postRequest
+    //             .update(id, {
+    //                 body: values.body,
+    //                 image: values.image
+    //             })
+    //             .then(() => <Redirect to="/"/>)
+    //             .catch(err => {
+    //                 // setErrors(err.response.data);
+    //                 // setIsLoading(false);
+    //             })
 
-    }
+    // }
+    const editPostHandler = async () => {
+      console.log("editPostHandler");
+      await dispatch(editPost({ ...values, profile: image }, values.id));
+    
+    };
 
   return (
     <section className="post_form">

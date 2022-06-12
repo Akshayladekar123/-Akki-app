@@ -52,8 +52,6 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         #     raise serializers.ValidationError(errors)
 
         return data
-   
-
 
     class Meta:
         model = User
